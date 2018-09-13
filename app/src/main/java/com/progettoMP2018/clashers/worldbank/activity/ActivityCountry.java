@@ -52,11 +52,11 @@ public class ActivityCountry extends AppCompatActivity implements CountryAdapter
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         RecyclerView recyclerView;
-        progressBar = findViewById(R.id.progressBar3);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_country);
         //Se arriviamo da ActivityIndicator prendiamo l'oggetto FullQuery con l'indicator già impostato in base alla scelta dell'utente
         fullQuery = (FullQuery) getIntent().getSerializableExtra("indicator_selected");
+        progressBar = findViewById(R.id.progressBar3);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true); //aggiunge "<" a sinistra della scritta nella toolbar

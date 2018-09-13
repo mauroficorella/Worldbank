@@ -1,6 +1,5 @@
 package com.progettoMP2018.clashers.worldbank.activity;
 
-
 import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
@@ -25,7 +24,6 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.progettoMP2018.clashers.worldbank.utility.CheckConnection;
 import com.progettoMP2018.clashers.worldbank.utility.VolleyHelper;
 import com.progettoMP2018.clashers.worldbank.utility.MyDividerItemDecoration;
@@ -36,7 +34,6 @@ import com.progettoMP2018.clashers.worldbank.entity.FullQuery;
 import com.progettoMP2018.clashers.worldbank.entity.Topic;
 import com.progettoMP2018.clashers.worldbank.utility.MyJsonParser;
 import com.progettoMP2018.clashers.worldbank.utility.VolleyRequestListener;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -54,12 +51,12 @@ public class ActivityTopic extends AppCompatActivity implements TopicsAdapter.To
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         RecyclerView recyclerView;
-        progressBar = findViewById(R.id.progressBar2);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_topic);
         //Se la selezione parte da Country, si estrapola l'oggetto FullQuery precedentemente istanziato
         //nella CountryActivity che avrà già il valore di country impostato, altrimenti fullQuery viene impostato a null
         fullQuery = (FullQuery) getIntent().getSerializableExtra("country_selected");
+        progressBar = findViewById(R.id.progressBar2);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true); //aggiunge "<" a sinistra della scritta nella toolbar
