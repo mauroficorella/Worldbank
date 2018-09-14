@@ -5,22 +5,16 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Filterable;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.progettoMP2018.clashers.worldbank.R;
-
 import com.progettoMP2018.clashers.worldbank.entity.SavedRequest;
-
-
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class OfflineDataAdapter extends RecyclerView.Adapter<OfflineDataAdapter.MyViewHolder>
         implements Filterable {
@@ -29,7 +23,9 @@ public class OfflineDataAdapter extends RecyclerView.Adapter<OfflineDataAdapter.
     private List<SavedRequest> elementsListFiltered;
     private OfflineDataAdapterListener listener;
 
-
+    //la sottostante classe viewholder viene usata per ridurre le invocazioni al metodo findviewbyid, si riciclano il
+    //più possibile le view usate per visualizzare elementi, e il viewholder conserva i riferimenti
+    //ai widget interni ad ogni elemento
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView topicName, indicatorName, countryName;
         public ImageView thumbnail;
@@ -46,7 +42,7 @@ public class OfflineDataAdapter extends RecyclerView.Adapter<OfflineDataAdapter.
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    // send selected topic in callback
+                    //elemento della lista selezionato
                     listener.onElementSelected(elementsListFiltered.get(getAdapterPosition()));
 
                 }
@@ -64,7 +60,8 @@ public class OfflineDataAdapter extends RecyclerView.Adapter<OfflineDataAdapter.
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    //metodo chiamato alla creazione dell'adapter e usato per inizializzare il ViewHolder
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) { //momento in cui un elemento della RecyclerView viene creato
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.offline_element_row_item, parent, false);
 
@@ -72,7 +69,8 @@ public class OfflineDataAdapter extends RecyclerView.Adapter<OfflineDataAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
+    //metodo chiamato per collegare il ViewHolder all'adapter; è dove si passano i dati al ViewHolder
+    public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) { //momento in cui vengono recuperati i riferimenti agli elementi interni della RecyclerView da popolare con i nuovi dati
         final SavedRequest elements = elementsListFiltered.get(position);
         holder.topicName.setText(elements.getTopicName());
         holder.indicatorName.setText(elements.getIndicatorName());
@@ -82,12 +80,12 @@ public class OfflineDataAdapter extends RecyclerView.Adapter<OfflineDataAdapter.
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount() { //restituisce il numero di elementi nella elementsList
         return elementsListFiltered.size();
     }
 
     @Override
-    public Filter getFilter() {
+    public Filter getFilter() { //filtro per la ricerca
         return new Filter() {
             @Override
             protected FilterResults performFiltering(CharSequence charSequence) {
@@ -95,8 +93,9 @@ public class OfflineDataAdapter extends RecyclerView.Adapter<OfflineDataAdapter.
                 if (charString.isEmpty() || charSequence.length() < 3) {
                     elementsListFiltered = elementsList;
                 } else { //il filtro sulla ricerca inizia quando i caratteri inseriti sono almeno 3
-                    List<SavedRequest> filteredList = new ArrayList<>();
+                    List<SavedRequest> filteredList = new ArrayList<>(); //creo una filtered list
                     for (SavedRequest row : elementsList) {
+                        //se la row contiene la sequenza di caratteri inserita, allora aggiunge la row alla filteredlist
                         if (row.getTopicName().toLowerCase().contains(charString.toLowerCase())
                                 || row.getIndicatorName().toLowerCase().contains(charString.toLowerCase())
                                 || row.getCountryName().toLowerCase().contains(charString.toLowerCase())) {
@@ -113,7 +112,7 @@ public class OfflineDataAdapter extends RecyclerView.Adapter<OfflineDataAdapter.
             }
 
             @Override
-            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) { //pubblica i risultati basati sulla ricerca
                 elementsListFiltered = (ArrayList<SavedRequest>) filterResults.values;
                 notifyDataSetChanged();
             }

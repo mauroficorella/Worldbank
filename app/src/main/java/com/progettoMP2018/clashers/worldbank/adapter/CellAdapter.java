@@ -27,15 +27,15 @@ public class CellAdapter extends RecyclerView.Adapter<CellAdapter.ViewHolder> {
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) { //momento in cui un elemento della RecyclerView viene creato
+    //metodo chiamato alla creazione dell'adapter e usato per inizializzare il ViewHolder
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) { //viene creato un elemento della RecyclerView
         View view = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.saved_chart_cell, viewGroup, false);//Se attachToRoot è impostato su false, il file di layout specificato nel primo parametro viene
-                                                                                //gonfiato e non collegato al ViewGroup specificato nel secondo parametro,
-                                                                                //ma la visualizzazione gonfiata acquisisce LayoutParams del genitore che consente a tale visualizzazione di adattarsi correttamente al padre
+                .inflate(R.layout.saved_chart_cell, viewGroup, false);
         return new ViewHolder(view);
     }
 
     @Override
+    //metodo chiamato per collegare il ViewHolder all'adapter; è dove si passano i dati al ViewHolder
     public void onBindViewHolder(@NonNull CellAdapter.ViewHolder viewHolder, final int i) { //momento in cui vengono recuperati i riferimenti agli elementi interni della RecyclerView da popolare con i nuovi dati
         viewHolder.img.setScaleType(ImageView.ScaleType.CENTER_CROP); //setta il modo di visualizzazione dell'immagine
         viewHolder.img.setImageBitmap(BitmapFactory.decodeFile(galleryList.get(i).getPath())); //decodifica la bmp passata come parametro
@@ -52,7 +52,7 @@ public class CellAdapter extends RecyclerView.Adapter<CellAdapter.ViewHolder> {
         return galleryList.size();
     }
 
-    //la sottostante classe viewholder viene usato per ridurre le invocazioni al metodo findviewbyid, si riciclano il
+    //la sottostante classe viewholder viene usata per ridurre le invocazioni al metodo findviewbyid, si riciclano il
     //più possibile le view usate per visualizzare elementi, e il viewholder conserva i riferimenti
     //ai widget interni ad ogni elemento
     public class ViewHolder extends RecyclerView.ViewHolder {

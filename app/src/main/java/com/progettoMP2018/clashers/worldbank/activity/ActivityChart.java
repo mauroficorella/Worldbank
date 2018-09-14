@@ -67,6 +67,7 @@ public class ActivityChart extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart);
+        progressBar = findViewById(R.id.progressBar4);
         dataChartList = new ArrayList<>();
         //request serve per l'accesso ai dati offline; sarà null se l'activity precedente non è "ActivityOfflineData"
         request = (SavedRequest) getIntent().getSerializableExtra("saved_request");
@@ -80,7 +81,6 @@ public class ActivityChart extends AppCompatActivity {
 
         //fullquery serve per usare i dati passati dall'activity precedente quando l'utente fa la scelta (topic/indicator/country)
         fullQuery = (FullQuery) getIntent().getSerializableExtra("item_selected");
-        progressBar = findViewById(R.id.progressBar4);
         if (fullQuery != null) { //se la fullquery non è nulla, si prendono i dati dalle activity precedenti e si usano per fare il grafico
             countryName = fullQuery.getCountry().getName();
             indicatorName = fullQuery.getIndicator().getName();
