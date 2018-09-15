@@ -42,12 +42,6 @@ public class VolleyHelper extends Application { //è una classe singleton in cui
         return mRequestQueue;
     }
 
-
-    public <T> void addToRequestQueue(Request<T> req, String tag) {
-        req.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
-        getRequestQueue().add(req);
-    }
-
     /*
         Metodo che aggiunge una richiesta (Request) alla
         singola istanza di RequestQueue
@@ -55,12 +49,6 @@ public class VolleyHelper extends Application { //è una classe singleton in cui
     public <T> void addToRequestQueue(Request<T> req) {
         req.setTag(TAG);
         getRequestQueue().add(req);
-    }
-
-    public void cancelPendingRequests(Object tag) {
-        if (mRequestQueue != null) {
-            mRequestQueue.cancelAll(tag);
-        }
     }
 
     public void getDataVolley(String url, final VolleyRequestListener listener) {
