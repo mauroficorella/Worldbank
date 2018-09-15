@@ -1,6 +1,5 @@
 package com.progettoMP2018.clashers.worldbank.utility;
 
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,7 +7,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.provider.Settings;
-
+import com.progettoMP2018.clashers.worldbank.R;
 
 public class CheckConnection { //serve per avvisare l'utente quando l'app parte con wifi/dati mobili disattivati; permette di attivarli
     Context context;
@@ -47,21 +46,20 @@ public class CheckConnection { //serve per avvisare l'utente quando l'app parte 
      */
     public static void showNoConnectionDialog(final Context context){
         AlertDialog alertDialog = new AlertDialog.Builder(context).create();
-        alertDialog.setMessage("Please, enable your internet connection to continue. " +
-                "If you don't want to do it, you can however go back and check your recent researches for visualize it offline.");
-        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "Connect to Wi-Fi", new DialogInterface.OnClickListener() {
+        alertDialog.setMessage(context.getString(R.string.connection_dialog_description));
+        alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, context.getString(R.string.connection_positive_button), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //reindirizza l'utente alle impostazione per accendere il Wi-Fi
                         context.startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
                     }
                 });
-        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "Connect to Mobile Data", new DialogInterface.OnClickListener() {
+        alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, context.getString(R.string.connection_negative_button), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         //reindirizza l'utente alle impostazione per accendere i Dati Mobili
                         context.startActivity(new Intent(Settings.ACTION_DATA_ROAMING_SETTINGS));
                     }
                 });
-        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,"Quit Application", new DialogInterface.OnClickListener() {
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,context.getString(R.string.connection_neutral_button), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 //si esce dall'applicazione
                 Intent startMain = new Intent(Intent.ACTION_MAIN);

@@ -268,14 +268,15 @@ public class ActivityChart extends AppCompatActivity {
             dataChartList.addAll(items);
 
             if (dataChartList.isEmpty()) {  //se la lista di oggetti "GraphData" è vuota si mostra il dialog di alert
+                progressBar.setVisibility(View.GONE);
                 showDialog();
-                return;
             } else { //altrimenti si setta il grafico basandosi sulla suddetta lista
                 progressBar.setVisibility(View.GONE);
                 setGraph();
             }
 
         } catch (JSONException e) {
+            progressBar.setVisibility(View.GONE);
             showDialog();
         }
 
@@ -290,8 +291,9 @@ public class ActivityChart extends AppCompatActivity {
         mChart.setDragEnabled(true); //funzionalità di dragging (o anche detto panning) per il grafico attivata
         mChart.setScaleEnabled(true); //funzionalità di "scaling" del grafico attivata su entrambi gli assi
         mChart.setTouchEnabled(true); //funzionalità touchscreen attivata
-        mChart.setPinchZoom(true); //funzione di pinch to zoom attivata
-        mChart.setDoubleTapToZoomEnabled(true); //funzione di doppio tap per zoomare attivata
+        mChart.setPinchZoom(true); //funzionalità di pinch to zoom attivata
+        mChart.setDoubleTapToZoomEnabled(true); //funzionalità di doppio tap per zoomare attivata
+        mChart.getDescription().setEnabled(false); //funzionalità che disabilita la descrizione del chart
 
         for (int i = 0; i < dataChartList.size(); i++) {
             if (dataChartList.get(i).getValue() != 0) {  //non prende valori nulli

@@ -53,5 +53,9 @@
     <string name="positive_deletemenu">Yes</string>
     <string name="negative_deletemenu">No</string>
     <string name="share_message">Image sended with Worldbank application by Clashers group</string>
+    <string name="connection_dialog_description">Please, enable your internet connection to continue. If you don\'t want to do it, you can however go back and check your recent researches for visualize it offline.</string>
+    <string name="connection_negative_button">Connect to Mobile Data</string>
+    <string name="connection_positive_button">Connect to Wi-Fi</string>
+    <string name="connection_neutral_button">Quit Application</string>
 
 </resources>
