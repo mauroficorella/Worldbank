@@ -47,7 +47,7 @@ public class MyJsonParser {
     }
 
 
-    public static List<Country> parseCountries(String jsonString) { //funzione che analizza il contenuto del file json
+    public static List<Country> parseCountries(String jsonString) {
         try {
             JSONArray countryArray = (new JSONArray(jsonString)).getJSONArray(1); //si prende il primo array nel file json visto che è un array di array e il primo array non serve a nulla
             Gson gson = new Gson(); //tramite il tool gson si trasformano i contenuti del json in oggetti riutilizzabili
@@ -61,11 +61,10 @@ public class MyJsonParser {
     }
 
 
-    public static List<GraphData> parseChartData(String jsonString) { //funzione che analizza il contenuto del file json
+    public static List<GraphData> parseChartData(String jsonString) {
         try {
             JSONArray chartDataArray = (new JSONArray(jsonString)).getJSONArray(1); //si prende il primo array nel file json visto che è un array di array e il primo array non serve a nulla
             Gson gson = new Gson(); //tramite il tool gson si trasformano i contenuti del json in oggetti riutilizzabili
-            //todo: controllare questo commento!
             Type listType = new TypeToken<List<GraphData>>() {
             }.getType();
             List<GraphData> items = gson.fromJson(String.valueOf(chartDataArray), listType); //si crea una lista di "GraphData" tramite gson prendendo il valore degli elementi in chartDataArray

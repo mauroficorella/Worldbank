@@ -15,7 +15,7 @@ public class CacheHandler {
         this.context = context;
     }
 
-    //funzione che cancella la cache
+    //metodo che cancella la cache
     public static void deleteCache(Context context) {
         try {
             File dir = context.getCacheDir();
@@ -25,7 +25,8 @@ public class CacheHandler {
         } catch (Exception e) {
         }
     }
-    //funzione che cancella una cartella
+    //Metodo che cancella una cartella. Verrà invocato per eliminare la
+    //cartella contente tutte le immagini dei grafici salvate
     public static boolean deleteDir(File dir) {
         if (dir != null && dir.isDirectory()) {
             String[] children = dir.list();

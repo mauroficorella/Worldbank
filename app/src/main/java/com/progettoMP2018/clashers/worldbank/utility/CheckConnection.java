@@ -43,7 +43,7 @@ public class CheckConnection { //serve per avvisare l'utente quando l'app parte 
         connessione internet abilitata (Wi-Fi o Dati Mobili) mostra un AlertDialog
         con tre bottoni di cui il primo e il secondo reindirizzeranno l'utente rispettivamente
         alle impostazioni per abilitare il Wi-Fi e i Dati Mobili, il terzo peremetterà di
-        chiudere l'applicazione nel casi in cui l'utente non voglia abilitare la connessione.
+        chiudere l'applicazione nel caso in cui l'utente non voglia abilitare la connessione.
      */
     public static void showNoConnectionDialog(final Context context){
         AlertDialog alertDialog = new AlertDialog.Builder(context).create();
@@ -63,6 +63,7 @@ public class CheckConnection { //serve per avvisare l'utente quando l'app parte 
                 });
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,"Quit Application", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+                //si esce dall'applicazione
                 Intent startMain = new Intent(Intent.ACTION_MAIN);
                 startMain.addCategory(Intent.CATEGORY_HOME);
                 startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
